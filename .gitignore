@@ -1,0 +1,5 @@
+dist
+node_modules
+
+# unsure if this should be commited or not
+pnpm-lock.yaml
