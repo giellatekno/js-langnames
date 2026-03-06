@@ -7,4 +7,4 @@ build:
     cat package.json | grep -v '"private":' > dist/package.json
 
 publish:
-    pnpm publish --access public dist/
+    env NPM_TOKEN="${NPM_TOKEN}" pnpm publish --access public dist/
