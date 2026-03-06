@@ -1,20 +1,23 @@
 {
     "name": "@giellatekno/langnames",
     "description": "Localized language names for the languages in our infrastructure",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Giellatekno <giellatekno@uit.no>",
+    "private": true,
     "repository": {
         "type": "git",
         "url": "https://github.com/giellatekno/js-langnames.git"
     },
     "license": "ISC",
     "scripts": {
-        "build": "pnpm exec tsc",
-        "typecheck": "pnpm exec typescript tsc"
+        "build": "pnpm exec tsc"
     },
     "type": "module",
     "exports": {
-        ".": "./dist/index.js",
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
         "./package.json": "./package.json"
     },
     "devDependencies": {

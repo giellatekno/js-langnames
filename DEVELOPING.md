@@ -13,10 +13,7 @@ token. The `.npmrc` file sets up that this access token will be used.
 `--access public` is required, otherwise it tries to publish a private package,
 which requires a paid account.
 
-`--no-git-checks` is just to bypass (p)npm whining about untracked files (which for me
-was that I had the access token stored in a file called `ACCESS_TOKEN`.)
-
 
 ```
-env NPM_TOKEN=$(cat ACCESS_TOKEN) pnpm publish --access public --no-git-checks
+env NPM_TOKEN=$(cat ACCESS_TOKEN) pnpm publish --access public
 ```
