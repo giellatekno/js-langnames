@@ -1,7 +1,7 @@
 {
     "name": "@giellatekno/langnames",
     "description": "Localized language names for the languages in our infrastructure",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Giellatekno <giellatekno@uit.no>",
     "private": true,
     "repository": {

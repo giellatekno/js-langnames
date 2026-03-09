@@ -4,6 +4,7 @@ default:
 build:
     rm -rf dist/
     pnpm run build
+    cp .npmrc dist/
     cat package.json | grep -v '"private":' | sed "s/\"\.\/dist\/index\./\"\.\/index\./" > dist/package.json
 
 publish:
