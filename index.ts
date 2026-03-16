@@ -18,7 +18,7 @@ const LANGNAMES = {
         nob: "dene suline",
         sme: "denesuline",
         fin: "denesuline",
-        rus: "дене Сулин",
+        rus: "дене сулин",
     },
     chr: {
         eng: "Cherokee",
@@ -116,14 +116,14 @@ const LANGNAMES = {
         nob: "ingrisk",
         sme: "inkeroisgiella",
         fin: "inkeroinen",
-        rus: " язык",
+        rus: "ижорский язык",
     },
     koi: {
         eng: "Komi Permyak",
         nob: "komipermjakisk",
         sme: "komipermjakgiella",
         fin: "komipermjakki",
-        rus: " язык",
+        rus: "коми-пермяцкий язык",
     },
     kom: {
         eng: "Komi",
