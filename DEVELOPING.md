@@ -13,6 +13,12 @@ pnpm install
 pnpm build
 ```
 
+## Testing
+
+```bash
+pnpm test
+```
+
 ## Publishing
 
 Commit all changes first, then bump the version (npm rejects overwriting an existing version):

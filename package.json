@@ -19,11 +19,13 @@
         "dist"
     ],
     "scripts": {
+        "test": "vitest run",
         "build": "tsc",
         "prepublishOnly": "pnpm build"
     },
     "devDependencies": {
-        "typescript": "^5.0.0"
+        "typescript": "^5.0.0",
+        "vitest": "^4.1.7"
     },
     "publishConfig": {
         "access": "public"

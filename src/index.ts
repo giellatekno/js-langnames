@@ -401,20 +401,27 @@ function get_our(ofLang: string, inLang: InLang): string | undefined {
     return our;
 }
 
-export function langname(ofLang: string, inLang: InLang): string {
-    const result = get_our(ofLang, inLang);
+export function langname(
+    ofLang: string,
+    inLang: InLang,
+    capitalize = false,
+): string {
+    let result = get_our(ofLang, inLang);
 
     if (!result) {
-        const intl_result = new Intl.DisplayNames([inLang], {
+        result = new Intl.DisplayNames([inLang], {
             type: "language",
         }).of(ofLang);
-        if (!intl_result || intl_result === ofLang) {
+        if (!result || result === ofLang) {
             console.warn(
                 `@giellatekno/langnames: Browser doesn't know how to say ${ofLang} in ${inLang}`,
             );
             return ofLang;
         }
-        return intl_result;
+    }
+
+    if (capitalize) {
+        result = result.charAt(0).toUpperCase() + result.slice(1);
     }
 
     // Replace space with non-breaking space
