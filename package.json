@@ -1,17 +1,17 @@
 {
     "name": "@giellatekno/langnames",
     "description": "Localized language names for the languages in our infrastructure",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "Giellatekno <giellatekno@uit.no>",
     "repository": {
         "type": "git",
         "url": "https://github.com/giellatekno/js-langnames.git"
     },
     "license": "ISC",
+    "type": "module",
     "exports": {
         ".": {
             "import": "./dist/index.js",
-            "require": "./dist/index.cjs",
             "types": "./dist/index.d.ts"
         }
     },

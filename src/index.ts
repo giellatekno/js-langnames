@@ -1,4 +1,4 @@
-const LANGNAMES = {
+const LANGNAMES: Record<string, Record<string, string>> = {
     bxr: {
         eng: "Buryat",
         nob: "burjatisk",
@@ -46,7 +46,7 @@ const LANGNAMES = {
         nob: "engelsk",
         sme: "eaŋgalsgiella",
         fin: "englanti",
-        rus: "англиийский язык",
+        rus: "английский язык",
     },
     evn: {
         eng: "Evenki",
@@ -130,7 +130,7 @@ const LANGNAMES = {
         nob: "komi",
         sme: "komigiella",
         fin: "komi",
-        rus: "венгерский язык",
+        rus: "коми язык",
     },
     kpv: {
         eng: "Komi",
@@ -333,7 +333,7 @@ const LANGNAMES = {
         nob: "svensk",
         sme: "ruoŧagiella",
         fin: "ruotsi",
-        rus: "шведсйий язык",
+        rus: "шведский язык",
     },
     tkl: {
         eng: "Tokelau",
@@ -379,22 +379,21 @@ const LANGNAMES = {
     },
 };
 
-type OfLang = keyof typeof LANGNAMES;
 type InLang = "eng" | "nob" | "sme" | "fin" | "rus";
 
-function get_our(of: OfLang, in_: InLang): string | undefined {
-    const lang = LANGNAMES[of];
+function get_our(ofLang: string, inLang: InLang): string | undefined {
+    const lang = LANGNAMES[ofLang];
     if (!lang) {
         console.warn(
-            `@giellatekno/langnames: Don't know how to say ${of} in any language`,
+            `@giellatekno/langnames: Don't know how to say ${ofLang} in any language`,
         );
         return;
     }
 
-    const our = lang[in_];
+    const our = lang[inLang];
     if (!our) {
         console.warn(
-            `@giellatekno/langnames: Don't know how to say ${of} in ${in_}`,
+            `@giellatekno/langnames: Don't know how to say ${ofLang} in ${inLang}`,
         );
         return;
     }
@@ -402,22 +401,23 @@ function get_our(of: OfLang, in_: InLang): string | undefined {
     return our;
 }
 
-export function langname(of: OfLang, in_: InLang): string {
-    const result = get_our(of, in_);
+export function langname(ofLang: string, inLang: InLang): string {
+    const result = get_our(ofLang, inLang);
 
     if (!result) {
-        const intl_result = new Intl.DisplayNames([in_], {
+        const intl_result = new Intl.DisplayNames([inLang], {
             type: "language",
-        }).of(of);
-        if (!intl_result || intl_result === of) {
+        }).of(ofLang);
+        if (!intl_result || intl_result === ofLang) {
             console.warn(
-                `@giellatekno/langnames: Browser doesn't know how to say ${of} in ${in_}`,
+                `@giellatekno/langnames: Browser doesn't know how to say ${ofLang} in ${inLang}`,
             );
-            return of;
+            return ofLang;
         }
         return intl_result;
     }
 
+    // Replace space with non-breaking space
     return result.replace(/ /g, "\u{A0}");
 }
 
