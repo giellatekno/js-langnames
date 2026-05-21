@@ -3,15 +3,11 @@
     "description": "Localized language names for the languages in our infrastructure",
     "version": "1.0.0",
     "author": "Giellatekno <giellatekno@uit.no>",
-    "access": "public",
     "repository": {
         "type": "git",
         "url": "https://github.com/giellatekno/js-langnames.git"
     },
     "license": "ISC",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.js",
@@ -28,5 +24,8 @@
     },
     "devDependencies": {
         "typescript": "^5.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
