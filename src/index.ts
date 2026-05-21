@@ -382,18 +382,58 @@ const LANGNAMES = {
 type OfLang = keyof typeof LANGNAMES;
 type InLang = "eng" | "nob" | "sme" | "fin" | "rus";
 
+function get_our(of: OfLang, in_: InLang): string | undefined {
+    const lang = LANGNAMES[of];
+    if (!lang) {
+        console.warn(
+            `@giellatekno/langnames: Don't know how to say ${of} in any language`,
+        );
+        return;
+    }
+
+    const our = lang[in_];
+    if (!our) {
+        console.warn(
+            `@giellatekno/langnames: Don't know how to say ${of} in ${in_}`,
+        );
+        return;
+    }
+
+    return our;
+}
+
 export function langname(of: OfLang, in_: InLang): string {
-    return LANGNAMES[of][in_].replace(/ /g, "\u{A0}");
+    const result = get_our(of, in_);
+
+    if (!result) {
+        const intl_result = new Intl.DisplayNames([in_], {
+            type: "language",
+        }).of(of);
+        if (!intl_result || intl_result === of) {
+            console.warn(
+                `@giellatekno/langnames: Browser doesn't know how to say ${of} in ${in_}`,
+            );
+            return of;
+        }
+        return intl_result;
+    }
+
+    return result.replace(/ /g, "\u{A0}");
 }
 
 export function iso6393_from_6391(code: string): string {
     switch (code) {
-        case "en": return "eng";
-        case "nb": return "nob";
-        case "se": return "sme";
-        case "fi": return "fin";
-        case "ru": return "rus";
-        default: throw Error(`unknown iso6391 code: ${code}`);
+        case "en":
+            return "eng";
+        case "nb":
+            return "nob";
+        case "se":
+            return "sme";
+        case "fi":
+            return "fin";
+        case "ru":
+            return "rus";
+        default:
+            throw Error(`unknown iso6391 code: ${code}`);
     }
 }
-
