@@ -1,4 +1,4 @@
-const LANGNAMES: Record<string, Record<string, string>> = {
+const LANGNAMES: Record<string, Record<InterfaceLangs, string>> = {
     "bxr": {
         eng: "Buryat",
         nob: "burjatisk",
@@ -44,7 +44,7 @@ const LANGNAMES: Record<string, Record<string, string>> = {
     "eng": {
         eng: "English",
         nob: "engelsk",
-        sme: "eaŋgalsgiella",
+        sme: "eaŋgalasgiella",
         fin: "englanti",
         rus: "английский язык",
     },
@@ -383,12 +383,56 @@ const LANGNAMES: Record<string, Record<string, string>> = {
         eng: "Old Literary Southern Sámi",
         nob: "sydlapska bokspråket",
         sme: "dološ oarjjitsámi girjegiella",
+        fin: "",
+        rus: "",
     },
 };
 
-type InLang = "eng" | "nob" | "sme" | "fin" | "rus";
+// TODO: Add rus
+const INTERFACE_LANGUAGE: Record<
+    InterfaceLangs,
+    Record<InterfaceLangs, string>
+> = {
+    eng: {
+        eng: "in English",
+        nob: "på engelsk",
+        sme: "eaŋgalasgillii",
+        fin: "englandiksi",
+        rus: "",
+    },
+    nob: {
+        eng: "in Norwegian",
+        nob: "på norsk",
+        sme: "dárogillii",
+        fin: "norjaksi",
+        rus: "",
+    },
+    sme: {
+        eng: "in North Sámi",
+        nob: "på nordsamisk",
+        sme: "davvisámegillii",
+        fin: "pohjoissaameksi",
+        rus: "",
+    },
+    fin: {
+        eng: "in Finnish",
+        nob: "på finsk",
+        sme: "suomagillii",
+        fin: "suomeksi",
+        rus: "",
+    },
+    rus: {
+        eng: "in Russian",
+        nob: "på russisk",
+        sme: "ruoššagillii",
+        fin: "venäjäksi",
+        rus: "",
+    },
+};
 
-function get_our(ofLang: string, inLang: InLang): string | undefined {
+type InterfaceLangs = "eng" | "nob" | "sme" | "fin" | "rus";
+
+function get_our(ofLang: string, inLang: InterfaceLangs): string | undefined {
     const lang = LANGNAMES[ofLang];
     if (!lang) {
         console.warn(
@@ -410,7 +454,7 @@ function get_our(ofLang: string, inLang: InLang): string | undefined {
 
 export function langname(
     ofLang: string,
-    inLang: InLang,
+    inLang: InterfaceLangs,
     capitalize = true,
 ): string {
     let result = get_our(ofLang, inLang);
@@ -437,7 +481,19 @@ export function langname(
     return result.replace(/ /g, "\u{A0}");
 }
 
-export function iso6393_from_6391(code: string): string {
+export function interface_language(
+    ofLang: InterfaceLangs,
+    inLang: InterfaceLangs,
+    capitalize = true,
+) {
+    let result = INTERFACE_LANGUAGE[ofLang][inLang];
+    if (capitalize) {
+        result = result.charAt(0).toUpperCase() + result.slice(1);
+    }
+    return result.replace(/ /g, "\u{A0}");
+}
+
+export function iso6393_from_6391(code: string): InterfaceLangs {
     switch (code) {
         case "en":
             return "eng";
